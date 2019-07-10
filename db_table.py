@@ -113,7 +113,7 @@ class db_table:
         columns_query = ", ".join(item.keys())
 
         values_query  = ", ".join([ "'%s'" % v for v in item.values()])
-        print(item.values())
+        #print(item.values())
 
         # INSERT INTO users(id, name) values (42, John)
         #
@@ -121,8 +121,8 @@ class db_table:
         # The reason is that sqlite does not provide substitution mechanism for columns parameters
         # In the context of this project, this is fine (no risk of user malicious input)
         cursor = self.db_conn.cursor()
-        print("values: " + values_query)
-        cursor.execute("""INSERT INTO %s(%s) values (%s)""" % (self.name, columns_query, values_query))
+        #print("values: " + values_query)
+        cursor.execute("INSERT INTO %s(%s) values (%s)" % (self.name, columns_query, values_query))
         cursor.close()
         self.db_conn.commit()
         return cursor.lastrowid

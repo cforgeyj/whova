@@ -122,7 +122,7 @@ class db_table:
         # In the context of this project, this is fine (no risk of user malicious input)
         cursor = self.db_conn.cursor()
         print("values: " + values_query)
-        cursor.execute("INSERT INTO %s(%s) values (%s)" % (self.name, columns_query, values_query))
+        cursor.execute("""INSERT INTO %s(%s) values (%s)""" % (self.name, columns_query, values_query))
         cursor.close()
         self.db_conn.commit()
         return cursor.lastrowid

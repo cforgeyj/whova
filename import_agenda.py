@@ -2,7 +2,7 @@ import xlrd
 from db_table import db_table
 
 agenda = db_table("agenda", {"id": "integer PRIMARY KEY", "date": "text", "start_time": "text", "end_time": "text",
-                             "session_title": "text"})
+                             "session_title": """text"""})
 
 # XLS_FILE = os.getcwd() + "\\agenda.xls"
 workbook = xlrd.open_workbook('agenda.xls')

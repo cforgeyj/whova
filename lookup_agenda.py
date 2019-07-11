@@ -1,18 +1,18 @@
-import sqlite3
 import sys
 from import_agenda import agenda
-
-#connect file to the interview test db
-
-conn = sqlite3.connect("interview_test.db")
-cursor = conn.cursor()
 
 #parse command line args where first is column name and second is value
 col=sys.argv[1] if len(sys.argv) > 1 else "somevalue"
 val = sys.argv[2]
-print("column: " + col)
-print("value: " + val)
-#call select and get all rows with val in column col
-result = agenda.select([col], where = {col: val})
-#print these rows
+#initialize array of different columns that can be queried
+columns = ["id", "date", "start_time", "end_time", "session_title", "location"]
+
+#call select to get all rows where the text in column col is val.
+#store these rows in result
+result = agenda.select(columns, where = {col: val})
+
+#print result
 print(result)
+
+
+

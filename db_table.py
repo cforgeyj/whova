@@ -73,19 +73,17 @@ class db_table:
         # by default, query all columns
         if not columns:
             columns = [ k for k in self.schema ]
-
         # build query string
         columns_query_string = ", ".join(columns)
         query                = "SELECT %s FROM %s" % (columns_query_string, self.name)
-
         # build where query string
         if where:
             where_query_string = [ "%s = '%s'" % (k,v) for k,v in where.items() ]
+            print(where_query_string)
             query             += " WHERE " + ' AND '.join(where_query_string)
         
         result = []
         # SELECT id, name FROM users [ WHERE id=42 AND name=John ]
-        #
         # Note that columns are formatted into the string without using sqlite safe substitution mechanism
         # The reason is that sqlite does not provide substitution mechanism for columns parameters
         # In the context of this project, this is fine (no risk of user malicious input)
@@ -95,7 +93,6 @@ class db_table:
             for i in range(0, len(columns)):
                 result_row[columns[i]] = row[i]
             result.append(result_row)
-
         return result
 
     #
